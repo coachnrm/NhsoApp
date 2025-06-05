@@ -33,19 +33,27 @@ namespace NhsoApp
             panel1 = new Panel();
             lblfcid = new Label();
             label7 = new Label();
+            lblfhn = new Label();
+            label9 = new Label();
+            lblhcode = new Label();
+            label12 = new Label();
+            lblsubInscl = new Label();
+            label10 = new Label();
             txtMobile = new TextBox();
             label6 = new Label();
             label2 = new Label();
             lblage = new Label();
             lblsex = new Label();
             lblbirthDate = new Label();
-            lblnation = new Label();
+            // lblnation = new Label();
             lblfname = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             lable2 = new Label();
             label1 = new Label();
+            lblcorrelationId = new Label();
+            label11 = new Label();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
             label8 = new Label();
@@ -62,32 +70,62 @@ namespace NhsoApp
             panel1.BackColor = Color.FromArgb(192, 255, 192);
             panel1.Controls.Add(lblfcid);
             panel1.Controls.Add(label7);
+            panel1.Controls.Add(lblfhn);
+            panel1.Controls.Add(label9);
+            panel1.Controls.Add(lblsubInscl);
+            panel1.Controls.Add(label10);
             panel1.Controls.Add(txtMobile);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lblage);
             panel1.Controls.Add(lblsex);
             panel1.Controls.Add(lblbirthDate);
-            panel1.Controls.Add(lblnation);
+            // panel1.Controls.Add(lblnation);
             panel1.Controls.Add(lblfname);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(lable2);
             panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblcorrelationId);
+            panel1.Controls.Add(label11);
+            panel1.Controls.Add(lblhcode);
+            panel1.Controls.Add(label12);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(646, 376);
+            panel1.Size = new Size(700, 576);
             panel1.TabIndex = 3;
+
+            // 
+            // lblfhn
+            // 
+            lblfhn.AutoSize = true;
+            lblfhn.Font = new Font("Segoe UI", 15F);
+            lblfhn.ForeColor = SystemColors.ControlText;
+            lblfhn.Location = new Point(162, 70);
+            lblfhn.Name = "lblfhn";
+            lblfhn.Size = new Size(24, 28);
+            lblfhn.TabIndex = 16;
+            lblfhn.Text = "...";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15F);
+            label9.Location = new Point(24, 70);
+            label9.Name = "label9";
+            label9.Size = new Size(144, 28);
+            label9.TabIndex = 15;
+            label9.Text = "HN";
             // 
             // lblfcid
             // 
             lblfcid.AutoSize = true;
             lblfcid.Font = new Font("Segoe UI", 15F);
             lblfcid.ForeColor = SystemColors.ControlText;
-            lblfcid.Location = new Point(159, 70);
+            lblfcid.Location = new Point(162, 100);
             lblfcid.Name = "lblfcid";
             lblfcid.Size = new Size(24, 28);
             lblfcid.TabIndex = 16;
@@ -97,32 +135,178 @@ namespace NhsoApp
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15F);
-            label7.Location = new Point(24, 70);
+            label7.Location = new Point(24, 100);
             label7.Name = "label7";
             label7.Size = new Size(144, 28);
             label7.TabIndex = 15;
             label7.Text = "เลขบัตรประชาชน";
+            
             // 
-            // txtMobile
+            // lblfname
             // 
-            txtMobile.BackColor = Color.Cornsilk;
-            txtMobile.Font = new Font("Segoe UI", 15F);
-            txtMobile.Location = new Point(159, 331);
-            txtMobile.Margin = new Padding(3, 2, 3, 2);
-            txtMobile.Name = "txtMobile";
-            txtMobile.Size = new Size(216, 34);
-            txtMobile.TabIndex = 14;
-            txtMobile.KeyPress += txtMobile_KeyPress;
+            lblfname.AutoSize = true;
+            lblfname.Font = new Font("Segoe UI", 15F);
+            lblfname.ForeColor = SystemColors.ControlText;
+            lblfname.Location = new Point(162, 130);
+            lblfname.Name = "lblfname";
+            lblfname.Size = new Size(24, 28);
+            lblfname.TabIndex = 6;
+            lblfname.Text = "...";
             // 
-            // label6
+            // label1
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 15F);
-            label6.Location = new Point(26, 331);
-            label6.Name = "label6";
-            label6.Size = new Size(114, 28);
-            label6.TabIndex = 13;
-            label6.Text = "เบอร์โทรศัพท์";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 15F);
+            label1.Location = new Point(24, 130);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 28);
+            label1.TabIndex = 0;
+            label1.Text = "ชื่อ - สกุล";
+            // 
+            // lblfname
+            // 
+            lblsubInscl.AutoSize = true;
+            lblsubInscl.Font = new Font("Segoe UI", 15F);
+            lblsubInscl.ForeColor = SystemColors.ControlText;
+            lblsubInscl.Location = new Point(162, 160);
+            lblsubInscl.Name = "lblsubInscl";
+            lblsubInscl.Size = new Size(24, 28);
+            lblsubInscl.TabIndex = 6;
+            lblsubInscl.Text = "...";
+            // 
+            // label1
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15F);
+            label10.Location = new Point(24, 160);
+            label10.Name = "label10";
+            label10.Size = new Size(86, 28);
+            label10.TabIndex = 0;
+            label10.Text = "สิทธิ์การรักษา";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15F);
+            label3.Location = new Point(26, 190);
+            label3.Name = "label3";
+            label3.Size = new Size(112, 28);
+            label3.TabIndex = 2;
+            label3.Text = "วันเดือนปีเกิด";
+            // 
+            // lblbirthDate
+            // 
+            lblbirthDate.AutoSize = true;
+            lblbirthDate.Font = new Font("Segoe UI", 15F);
+            lblbirthDate.Location = new Point(162, 190);
+            lblbirthDate.Name = "lblbirthDate";
+            lblbirthDate.Size = new Size(24, 28);
+            lblbirthDate.TabIndex = 8;
+            lblbirthDate.Text = "...";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15F);
+            label5.Location = new Point(26, 220);
+            label5.Name = "label5";
+            label5.Size = new Size(42, 28);
+            label5.TabIndex = 4;
+            label5.Text = "อายุ";
+            // 
+            // lblage
+            // 
+            lblage.AutoSize = true;
+            lblage.Font = new Font("Segoe UI", 15F);
+            lblage.Location = new Point(162, 220);
+            lblage.Name = "lblage";
+            lblage.Size = new Size(24, 28);
+            lblage.TabIndex = 10;
+            lblage.Text = "...";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15F);
+            label4.Location = new Point(26, 250);
+            label4.Name = "label4";
+            label4.Size = new Size(42, 28);
+            label4.TabIndex = 3;
+            label4.Text = "เพศ";
+            // 
+            // lblsex
+            // 
+            lblsex.AutoSize = true;
+            lblsex.Font = new Font("Segoe UI", 15F);
+            lblsex.Location = new Point(162, 250);
+            lblsex.Name = "lblsex";
+            lblsex.Size = new Size(24, 28);
+            lblsex.TabIndex = 9;
+            lblsex.Text = "...";
+            // 
+            // label4
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 15F);
+            label11.Location = new Point(26, 280);
+            label11.Name = "label11";
+            label11.Size = new Size(42, 28);
+            label11.TabIndex = 3;
+            label11.Text = "CorrelationId";
+            // 
+            // lblsex
+            // 
+            lblcorrelationId.AutoSize = true;
+            lblcorrelationId.Font = new Font("Segoe UI", 15F);
+            lblcorrelationId.Location = new Point(162, 280);
+            lblcorrelationId.Name = "lblcorrelationId";
+            lblcorrelationId.Size = new Size(24, 28);
+            lblcorrelationId.TabIndex = 9;
+            lblcorrelationId.Text = "...";
+
+            // 
+            // lblhcode
+            // 
+            lblhcode.AutoSize = true;
+            lblhcode.Font = new Font("Segoe UI", 15F);
+            lblhcode.Location = new Point(162, 310);
+            lblhcode.Name = "lblhcode";
+            lblhcode.Size = new Size(24, 28);
+            lblhcode.TabIndex = 9;
+            lblhcode.Text = "...";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 15F);
+            label12.Location = new Point(26, 310);
+            label12.Name = "label12";
+            label12.Size = new Size(114, 28);
+            label12.TabIndex = 13;
+            label12.Text = "hcode";
+            // // 
+            // // txtMobile
+            // // 
+            // txtMobile.BackColor = Color.Cornsilk;
+            // txtMobile.Font = new Font("Segoe UI", 15F);
+            // txtMobile.Location = new Point(162, 331);
+            // txtMobile.Margin = new Padding(3, 2, 3, 2);
+            // txtMobile.Name = "txtMobile";
+            // txtMobile.Size = new Size(216, 34);
+            // txtMobile.TabIndex = 14;
+            // txtMobile.KeyPress += txtMobile_KeyPress;
+            // // 
+            // // label6
+            // // 
+            // label6.AutoSize = true;
+            // label6.Font = new Font("Segoe UI", 15F);
+            // label6.Location = new Point(26, 331);
+            // label6.Name = "label6";
+            // label6.Size = new Size(114, 28);
+            // label6.TabIndex = 13;
+            // label6.Text = "เบอร์โทรศัพท์";
+
+
             // 
             // label2
             // 
@@ -133,107 +317,34 @@ namespace NhsoApp
             label2.Size = new Size(345, 45);
             label2.TabIndex = 12;
             label2.Text = "ระบบตรวจสอบสิทธิ์ NHSO";
-            // 
-            // lblage
-            // 
-            lblage.AutoSize = true;
-            lblage.Font = new Font("Segoe UI", 15F);
-            lblage.Location = new Point(159, 287);
-            lblage.Name = "lblage";
-            lblage.Size = new Size(24, 28);
-            lblage.TabIndex = 10;
-            lblage.Text = "...";
-            // 
-            // lblsex
-            // 
-            lblsex.AutoSize = true;
-            lblsex.Font = new Font("Segoe UI", 15F);
-            lblsex.Location = new Point(159, 245);
-            lblsex.Name = "lblsex";
-            lblsex.Size = new Size(24, 28);
-            lblsex.TabIndex = 9;
-            lblsex.Text = "...";
-            // 
-            // lblbirthDate
-            // 
-            lblbirthDate.AutoSize = true;
-            lblbirthDate.Font = new Font("Segoe UI", 15F);
-            lblbirthDate.Location = new Point(159, 208);
-            lblbirthDate.Name = "lblbirthDate";
-            lblbirthDate.Size = new Size(24, 28);
-            lblbirthDate.TabIndex = 8;
-            lblbirthDate.Text = "...";
+            
+            
+            
             // 
             // lblnation
             // 
-            lblnation.AutoSize = true;
-            lblnation.Font = new Font("Segoe UI", 15F);
-            lblnation.Location = new Point(159, 180);
-            lblnation.Name = "lblnation";
-            lblnation.Size = new Size(24, 28);
-            lblnation.TabIndex = 7;
-            lblnation.Text = "...";
-            // 
-            // lblfname
-            // 
-            lblfname.AutoSize = true;
-            lblfname.Font = new Font("Segoe UI", 15F);
-            lblfname.ForeColor = SystemColors.ControlText;
-            lblfname.Location = new Point(159, 152);
-            lblfname.Name = "lblfname";
-            lblfname.Size = new Size(24, 28);
-            lblfname.TabIndex = 6;
-            lblfname.Text = "...";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 15F);
-            label5.Location = new Point(26, 287);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 28);
-            label5.TabIndex = 4;
-            label5.Text = "อายุ";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 15F);
-            label4.Location = new Point(26, 245);
-            label4.Name = "label4";
-            label4.Size = new Size(42, 28);
-            label4.TabIndex = 3;
-            label4.Text = "เพศ";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 15F);
-            label3.Location = new Point(26, 208);
-            label3.Name = "label3";
-            label3.Size = new Size(112, 28);
-            label3.TabIndex = 2;
-            label3.Text = "วันเดือนปีเกิด";
+            // lblnation.AutoSize = true;
+            // lblnation.Font = new Font("Segoe UI", 15F);
+            // lblnation.Location = new Point(162, 180);
+            // lblnation.Name = "lblnation";
+            // lblnation.Size = new Size(24, 28);
+            // lblnation.TabIndex = 7;
+            // lblnation.Text = "...";
+            
+            
+            
+           
             // 
             // lable2
             // 
-            lable2.AutoSize = true;
-            lable2.Font = new Font("Segoe UI", 15F);
-            lable2.Location = new Point(26, 180);
-            lable2.Name = "lable2";
-            lable2.Size = new Size(73, 28);
-            lable2.TabIndex = 1;
-            lable2.Text = "สัญชาติ";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15F);
-            label1.Location = new Point(24, 152);
-            label1.Name = "label1";
-            label1.Size = new Size(86, 28);
-            label1.TabIndex = 0;
-            label1.Text = "ชื่อ - สกุล";
+            // lable2.AutoSize = true;
+            // lable2.Font = new Font("Segoe UI", 15F);
+            // lable2.Location = new Point(26, 180);
+            // lable2.Name = "lable2";
+            // lable2.Size = new Size(73, 28);
+            // lable2.TabIndex = 1;
+            // lable2.Text = "สัญชาติ";
+            
             // 
             // pictureBox1
             // 
@@ -303,7 +414,7 @@ namespace NhsoApp
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
-            ClientSize = new Size(648, 376);
+            ClientSize = new Size(700, 576);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -331,7 +442,7 @@ namespace NhsoApp
         private System.Windows.Forms.Label lblage;
         private System.Windows.Forms.Label lblsex;
         private System.Windows.Forms.Label lblbirthDate;
-        private System.Windows.Forms.Label lblnation;
+        // private System.Windows.Forms.Label lblnation;
         private System.Windows.Forms.Label lblfname;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
@@ -342,7 +453,15 @@ namespace NhsoApp
         private System.Windows.Forms.Label lblDateTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label8;
-        private Label label7;
-        private Label lblfcid;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblfcid;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblfhn;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblsubInscl;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblcorrelationId;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblhcode;
     }
 }
