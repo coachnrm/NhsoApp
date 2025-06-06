@@ -37,9 +37,11 @@ namespace NhsoApp
             label9 = new Label();
             lblhcode = new Label();
             label12 = new Label();
+            lbldepartment = new Label();
+            label13 = new Label();
             lblsubInscl = new Label();
             label10 = new Label();
-            txtMobile = new TextBox();
+            // txtMobile = new TextBox();
             label6 = new Label();
             label2 = new Label();
             lblage = new Label();
@@ -74,7 +76,7 @@ namespace NhsoApp
             panel1.Controls.Add(label9);
             panel1.Controls.Add(lblsubInscl);
             panel1.Controls.Add(label10);
-            panel1.Controls.Add(txtMobile);
+            // panel1.Controls.Add(txtMobile);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lblage);
@@ -91,6 +93,8 @@ namespace NhsoApp
             panel1.Controls.Add(label11);
             panel1.Controls.Add(lblhcode);
             panel1.Controls.Add(label12);
+            panel1.Controls.Add(lbldepartment);
+            panel1.Controls.Add(label13);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
@@ -284,6 +288,38 @@ namespace NhsoApp
             label12.Size = new Size(114, 28);
             label12.TabIndex = 13;
             label12.Text = "hcode";
+            // 
+            // lblhcode
+            // 
+            lbldepartment.AutoSize = true;
+            lbldepartment.Font = new Font("Segoe UI", 15F);
+            lbldepartment.Location = new Point(162, 340);
+            lbldepartment.Name = "lbldepartment";
+            lbldepartment.Size = new Size(24, 28);
+            lbldepartment.TabIndex = 9;
+            lbldepartment.Text = "...";
+            // 
+            // label12
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 15F);
+            label13.Location = new Point(26, 340);
+            label13.Name = "label13";
+            label13.Size = new Size(114, 28);
+            label13.TabIndex = 13;
+            label13.Text = "สิทธิส่งตรวจ";
+             // 
+            // bntSentData
+            // 
+            // bntSentData.Font = new Font("Segoe UI", 13F);
+            // bntSentData.Location = new Point(25, 271);
+            // bntSentData.Margin = new Padding(3, 2, 3, 2);
+            // bntSentData.Name = "bntSentData";
+            // bntSentData.Size = new Size(146, 65);
+            // bntSentData.TabIndex = 1;
+            // bntSentData.Text = "เปิดสิทธิ์";
+            // bntSentData.UseVisualStyleBackColor = true;
+            // bntSentData.Click += bntSentData_Click;
             // // 
             // // txtMobile
             // // 
@@ -448,7 +484,7 @@ namespace NhsoApp
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtMobile;
+        // private System.Windows.Forms.TextBox txtMobile;
         private System.Windows.Forms.Button bntSentData;
         private System.Windows.Forms.Label lblDateTime;
         private System.Windows.Forms.Timer timer1;
@@ -463,5 +499,7 @@ namespace NhsoApp
         private System.Windows.Forms.Label lblcorrelationId;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblhcode;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbldepartment;
     }
 }
