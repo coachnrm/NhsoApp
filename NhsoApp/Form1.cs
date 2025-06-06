@@ -1,3 +1,4 @@
+using System.Drawing.Printing;
 using System.Text;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
@@ -19,6 +20,7 @@ namespace NhsoApp
         string _mobile;
         string _correlationId;
         private static HttpClient _httpClient = new HttpClient();
+        PrintDocument printDocument = new PrintDocument();
 
         private static Uri BaseAddress { get; set; } = new Uri("http://localhost:8189");
 
@@ -43,6 +45,7 @@ namespace NhsoApp
             lblsex.Text = "XX";
             lblage.Text = "XX";
             lbldepartment.Text = "XXXXXXXX";
+            pictureBox1.Image = Image.FromFile(@"../Resources/888.png");
             label8.Show();
             GetCard();
             //  idcard.MonitorStart 
@@ -64,7 +67,7 @@ namespace NhsoApp
             lblsex.Text = "XX";
             lblage.Text = "XX";
             lbldepartment.Text = "XXXXXXXX";
-            pictureBox1.Image = "";
+            pictureBox1.Image = Image.FromFile(@"../Resources/888.png");
             label8.Show();
             GetCard();
             //  idcard.MonitorStart 
@@ -87,7 +90,7 @@ namespace NhsoApp
         {
             string url_checkcard = "http://localhost:8189/api/smartcard/terminals";
             string url = "http://localhost:8189/api/smartcard/read?readImageFlag=false";
-            
+
             HttpClient client = new HttpClient();
 
             // Check for card
@@ -111,7 +114,7 @@ namespace NhsoApp
             var patients = JsonConvert.DeserializeObject<ciddata>(responsep);
 
             // Convert title
-            string Tname = patients.pname  ?? "";
+            string Tname = patients.pname ?? "";
             // switch (tname)
             // {
             //     case "001": Tname = "นายแพทย์"; break;
@@ -123,7 +126,7 @@ namespace NhsoApp
 
             // Convert nationality
             string tnation = data.nation;
-            lblfhn.Text= patients.hn  ?? "";
+            lblfhn.Text = patients.hn ?? "";
             // tname.Text= patients.pname;
             Tnation = tnation == "099" ? "ไทย" : "";
 
@@ -162,8 +165,8 @@ namespace NhsoApp
             // lblbirthDate.Text = dd + "-" + mm + "-" + yy;
             lblage.Text = data.age;
             lblsex.Text = data.sex;
-            
-            
+
+
             if (data.hospMainOp == null || string.IsNullOrWhiteSpace(data.hospMainOp.hcode))
             {
                 if (data.hospMain == null || string.IsNullOrWhiteSpace(data.hospMain.hcode))
@@ -180,7 +183,7 @@ namespace NhsoApp
             {
                 lblhcode.Text = $"{data.hospMainOp.hcode ?? ""} {data.hospMainOp.hname ?? ""}";
             }
-            if (data.hospMain != null )// || string.IsNullOrWhiteSpace(data.hospMain.hcode))
+            if (data.hospMain != null)// || string.IsNullOrWhiteSpace(data.hospMain.hcode))
             {
                 if (data.hospMain.hcode == "11304" || data.hospMain.hcode == "11305")
                 {
@@ -717,7 +720,8 @@ namespace NhsoApp
                         lbldepartment.Text = " ";
                     }
                 }
-            }else
+            }
+            else
             {
                 // lbldepartment.Text = "ffffff";
                 if (data.mainInscl == "(UCS) สิทธิหลักประกันสุขภาพแห่งชาติ" && data.subInscl == "(89) ช่วงอายุ 12-59 ปี")
@@ -995,7 +999,7 @@ namespace NhsoApp
                 data_clemdetail = _ctype.claimTypeName;
             }
 
-             pictureBox1.Image = Base64ToImage(patients.pImage);
+            pictureBox1.Image = Base64ToImage(patients.pImage);
 
             // Json preparation before using PostCard
 
@@ -1110,7 +1114,7 @@ namespace NhsoApp
         public void cleatdata()
         {
             // txtMobile.Text = "";
-            pictureBox1.Image = Image.FromFile(@"Resources\777.png");
+            pictureBox1.Image = Image.FromFile(@"../Resources/888.png");
             lblbirthDate.Text = "XX-XX-XXX";
             lblfname.Text = "XX XXXXX  XXXXX";
             // lblnation.Text = "XX";
@@ -1261,74 +1265,74 @@ namespace NhsoApp
             // }
             // else
             // {
-                //==============================
-                string url_checkcard = "http://localhost:8189/api/smartcard/terminals";
-                //string url = "http://localhost:8189/api/smartcard/read?readImageFlag=false";
-                string url1 = "http://localhost:8189/api/smartcard/read?readImageFlag=true";
-                HttpClient client = new HttpClient();
+            //==============================
+            string url_checkcard = "http://localhost:8189/api/smartcard/terminals";
+            //string url = "http://localhost:8189/api/smartcard/read?readImageFlag=false";
+            string url1 = "http://localhost:8189/api/smartcard/read?readImageFlag=true";
+            HttpClient client = new HttpClient();
 
 
-                //checkcard=======
-                string response_readcard = await client.GetStringAsync(url_checkcard);
-                var datacard = JsonConvert.DeserializeObject<List<checkcard>>(response_readcard);
-                //  var datacard = JsonConvert.DeserializeObject<checkcard>(response_readcard);
+            //checkcard=======
+            string response_readcard = await client.GetStringAsync(url_checkcard);
+            var datacard = JsonConvert.DeserializeObject<List<checkcard>>(response_readcard);
+            //  var datacard = JsonConvert.DeserializeObject<checkcard>(response_readcard);
 
-                bool tnamecard = true;
-                foreach (var item in datacard)
+            bool tnamecard = true;
+            foreach (var item in datacard)
+            {
+                tnamecard = item.isPresent;
+            }
+            if (tnamecard == false)
+            {
+                MessageBox.Show("ไม่พบบัตร !!! กรุณาเสียบบัตรประชาชน.", "Error ไม่สามารถทำรายการได้", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            else
+            {
+                string response = await client.GetStringAsync(url1);
+                var data = JsonConvert.DeserializeObject<ciddata>(response);
+                string urlp = "http://172.16.200.202:8089/api/Hos/getpatienthnimage?_cid=" + data.pid;
+                string responsep = await client.GetStringAsync(urlp);
+                var patients = JsonConvert.DeserializeObject<ciddata>(responsep);
+                string urls = "http://172.16.200.202:8089/api/Hos/GetLatestOpdDepByCid?_cid=" + data.pid;
+                string responses = await client.GetStringAsync(urls);
+                var sit = JsonConvert.DeserializeObject<ciddata>(responses);
+                string Tname = patients.pname;
+                // string nextPttype = sit.nextPttype;
+                // string name = sit.name;
+                // string department = sit.department;
+
+                // switch (tname)
+                // {
+                //     case "003":
+                //         Tname = "นาย";
+                //         break;
+                //     case "004":
+                //         Tname = "นางสาว";
+                //         break;
+                //     default:
+                //         break;
+                // }
+
+                string tnation = data.nation;
+                switch (tnation)
                 {
-                    tnamecard = item.isPresent;
+                    case "099":
+                        Tnation = "ไทย";
+                        break;
+                    default:
+                        break;
                 }
-                if (tnamecard == false)
-                {
-                    MessageBox.Show("ไม่พบบัตร !!! กรุณาเสียบบัตรประชาชน.", "Error ไม่สามารถทำรายการได้", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
 
+                lblfname.Text = Tname + " " + data.fname + "  " + data.lname;
+                // lblnation.Text = Tnation;//data.nation;
 
-                else
-                {
-                    string response = await client.GetStringAsync(url1);
-                    var data = JsonConvert.DeserializeObject<ciddata>(response);
-                    string urlp = "http://172.16.200.202:8089/api/Hos/getpatienthnimage?_cid="+ data.pid;
-                    string responsep = await client.GetStringAsync(urlp);
-                    var patients = JsonConvert.DeserializeObject<ciddata>(responsep);
-                    string urls = "http://172.16.200.202:8089/api/Hos/GetLatestOpdDepByCid?_cid="+ data.pid;
-                    string responses = await client.GetStringAsync(urls);
-                    var sit = JsonConvert.DeserializeObject<ciddata>(responses);
-                    string Tname = patients.pname;
-                    // string nextPttype = sit.nextPttype;
-                    // string name = sit.name;
-                    // string department = sit.department;
-
-                    // switch (tname)
-                    // {
-                    //     case "003":
-                    //         Tname = "นาย";
-                    //         break;
-                    //     case "004":
-                    //         Tname = "นางสาว";
-                    //         break;
-                    //     default:
-                    //         break;
-                    // }
-
-                    string tnation = data.nation;
-                    switch (tnation)
-                    {
-                        case "099":
-                            Tnation = "ไทย";
-                            break;
-                        default:
-                            break;
-                    }
-
-                    lblfname.Text = Tname + " " + data.fname + "  " + data.lname;
-                    // lblnation.Text = Tnation;//data.nation;
-
-                    string dd = data.birthDate.Substring(6);
-                    string mm = data.birthDate.Substring(4, 2);
-                    string yy = data.birthDate.Substring(0, 4);
-                    var thaiMonths = new Dictionary<string, string>
+                string dd = data.birthDate.Substring(6);
+                string mm = data.birthDate.Substring(4, 2);
+                string yy = data.birthDate.Substring(0, 4);
+                var thaiMonths = new Dictionary<string, string>
                         {
                             { "01", "มกราคม" },
                             { "02", "กุมภาพันธ์" },
@@ -1344,102 +1348,132 @@ namespace NhsoApp
                             { "12", "ธันวาคม" }
                         };
 
-                    // แปลงเดือนเป็นชื่อภาษาไทย
-                    string thaiMonth = thaiMonths.ContainsKey(mm) ? thaiMonths[mm] : "";
+                // แปลงเดือนเป็นชื่อภาษาไทย
+                string thaiMonth = thaiMonths.ContainsKey(mm) ? thaiMonths[mm] : "";
 
-                    // แสดงวันเกิดรูปแบบ: 01 มกราคม 2567
-                    lblbirthDate.Text = $"{dd} {thaiMonth} {yy}";
-                    // lblbirthDate.Text = dd + "-" + mm + "-" + yy;//data.birthDate;
-                    lblage.Text = data.age;
-                    lblsex.Text = data.sex;
-                    lblfcid.Text = data.pid;
-                    lblhcode.Text = $"{data.hospMain.hcode} {data.hospMain.hname}";
-                    lblfhn.Text =  patients.hn;
-                    lblsubInscl.Text = data.subInscl;
-                    lblcorrelationId.Text = data.correlationId;
+                // แสดงวันเกิดรูปแบบ: 01 มกราคม 2567
+                lblbirthDate.Text = $"{dd} {thaiMonth} {yy}";
+                // lblbirthDate.Text = dd + "-" + mm + "-" + yy;//data.birthDate;
+                lblage.Text = data.age;
+                lblsex.Text = data.sex;
+                lblfcid.Text = data.pid;
+                lblhcode.Text = $"{data.hospMain.hcode} {data.hospMain.hname}";
+                lblfhn.Text = patients.hn;
+                lblsubInscl.Text = data.subInscl;
+                lblcorrelationId.Text = data.correlationId;
 
-                    _pid = data.pid;
-                    _correlationId = data.correlationId;
+                _pid = data.pid;
+                _correlationId = data.correlationId;
 
-                    // string ctype;
+                // string ctype;
 
-                    if (data.claimTypes != null)
+                if (data.claimTypes != null)
+                {
+                    var _ctype = data.claimTypes.FirstOrDefault();
+                    //  ctype = _ctype.ToString();
+                    data_ctype = _ctype.claimType.ToString();
+                    data_clemdetail = _ctype.claimTypeName.ToString();
+                }
+
+
+                //=================
+                pictureBox1.Image = Base64ToImage(data.image);
+                //==============================
+
+                string url = "http://localhost:8189/api/nhso-service/confirm-save";
+                var s = new sendData();
+                s.pid = _pid;
+                // MessageBox.Show(s.pid);
+                s.claimType = data_ctype;
+                // MessageBox.Show(s.claimType);
+                // s.mobile = txtMobile.Text;//_mobile;
+                // MessageBox.Show(s.mobile);
+                s.correlationId = _correlationId;
+                //  MessageBox.Show(s.correlationId);
+
+                //POST ==== DATA====
+                var xpost = POSTDataCommit(s, url); // ขอเดิมใช้งานได้อยู่
+                                                    //new posrdata ยังไม่ได้ test 
+                                                    //  rtClames = NewsentToClan(_pid, data_ctype, txtMobile.Text, _correlationId); //NewsentToClan(Convert.ToString(s.pid), Convert.ToString(s.claimType), Convert.ToString(s.mobile), Convert.ToString(s.correlationId));
+                                                    //  GGG();
+
+
+                if (returnValueData != null)
+                {
+                    var yourdata = JsonConvert.DeserializeObject<RtClame>(returnValueData);
+
+                    if (yourdata.pid != null)
                     {
-                        var _ctype = data.claimTypes.FirstOrDefault();
-                        //  ctype = _ctype.ToString();
-                        data_ctype = _ctype.claimType.ToString();
-                        data_clemdetail = _ctype.claimTypeName.ToString();
+                        //print
+
+                        //CrystalReport1 cp = new CrystalReport1();
+                        //cp.Parameter_clamNumber1 = yourdata.claimType;
+
+                        //ReportViewer reportViewer = new ReportViewer
+                        //{
+                        //    ProcessingMode = ProcessingMode.Local,
+                        //    SizeToReportContent = true
+                        //};
+                        ////C:\CARD-CID\NSHO-READ\NSHO-READ\Report1.rdlc
+                        //reportViewer.LocalReport.ReportPath = Path.Combine("C:\\CARD-CID\\NSHO-READ\\NSHO-READ", "Report1.rdlc");
+
+                        //  return View();
+
+
+
+                        MessageBox.Show(Convert.ToString(yourdata.pid));
+                        MessageBox.Show(Convert.ToString(yourdata.claimType));
+                        MessageBox.Show(Convert.ToString(yourdata.correlationId));
+                        MessageBox.Show(Convert.ToString(yourdata.createdDate));
+                        MessageBox.Show(Convert.ToString(yourdata.claimCode));
+
+                        //printdata
+                        MessageBox.Show("ส่งข้อมูลสำเร็จ");
+                        cleatdata();
                     }
-
-
-                    //=================
-                    pictureBox1.Image = Base64ToImage(data.image);
-                    //==============================
-                    
-                    string url = "http://localhost:8189/api/nhso-service/confirm-save";
-                    var s = new sendData();
-                    s.pid = _pid;
-                    // MessageBox.Show(s.pid);
-                    s.claimType = data_ctype;
-                    // MessageBox.Show(s.claimType);
-                    // s.mobile = txtMobile.Text;//_mobile;
-                                              // MessageBox.Show(s.mobile);
-                    s.correlationId = _correlationId;
-                    //  MessageBox.Show(s.correlationId);
-
-                    //POST ==== DATA====
-                    var xpost = POSTDataCommit(s, url); // ขอเดิมใช้งานได้อยู่
-                                                        //new posrdata ยังไม่ได้ test 
-                                                        //  rtClames = NewsentToClan(_pid, data_ctype, txtMobile.Text, _correlationId); //NewsentToClan(Convert.ToString(s.pid), Convert.ToString(s.claimType), Convert.ToString(s.mobile), Convert.ToString(s.correlationId));
-                                                        //  GGG();
-
-
-                    if (returnValueData != null)
+                    else
                     {
-                        var yourdata = JsonConvert.DeserializeObject<RtClame>(returnValueData);
-
-                        if (yourdata.pid != null)
-                        {
-                            //print
-
-                            //CrystalReport1 cp = new CrystalReport1();
-                            //cp.Parameter_clamNumber1 = yourdata.claimType;
-
-                            //ReportViewer reportViewer = new ReportViewer
-                            //{
-                            //    ProcessingMode = ProcessingMode.Local,
-                            //    SizeToReportContent = true
-                            //};
-                            ////C:\CARD-CID\NSHO-READ\NSHO-READ\Report1.rdlc
-                            //reportViewer.LocalReport.ReportPath = Path.Combine("C:\\CARD-CID\\NSHO-READ\\NSHO-READ", "Report1.rdlc");
-                           
-                          //  return View();
-
-
-
-                            MessageBox.Show(Convert.ToString(yourdata.pid));
-                            MessageBox.Show(Convert.ToString(yourdata.claimType));
-                            MessageBox.Show(Convert.ToString(yourdata.correlationId));
-                            MessageBox.Show(Convert.ToString(yourdata.createdDate));
-                            MessageBox.Show(Convert.ToString(yourdata.claimCode));
-
-                            //printdata
-                            MessageBox.Show("ส่งข้อมูลสำเร็จ");
-                            cleatdata();
-                        }
-                        else 
-                        {
-                            MessageBox.Show("ไม่สามารถส่งข้อมูล:ได้:พบข้อมูลซ้ำ: มีการส่งข้อมูลไปแล้ว","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            cleatdata();
-                        }
+                        MessageBox.Show("ไม่สามารถส่งข้อมูล:ได้:พบข้อมูลซ้ำ: มีการส่งข้อมูลไปแล้ว", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cleatdata();
                     }
                 }
+            }
             // }
-           
+
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-          lblDateTime.Text =  DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
+            lblDateTime.Text = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
         }
+        private void PrintNow()
+        {
+            printDocument.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
+
+            // แสดง Dialog ให้ผู้ใช้เลือกเครื่องพิมพ์ (ถ้าไม่ต้องการ dialog ให้ใช้ printDocument.Print() เลย)
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+        }
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            // ตั้งค่าฟอนต์
+            Font printFont = new Font("Arial", 12);
+            Brush brush = Brushes.Black;
+
+            // ข้อความที่จะพิมพ์
+            string printText = "นี่คือข้อความที่พิมพ์จาก WinForms!";
+
+            // ตำแหน่งที่พิมพ์ (X, Y)
+            e.Graphics.DrawString(printText, printFont, brush, new PointF(20, 5));
+        }
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintNow();
+        }
+
     }
 }

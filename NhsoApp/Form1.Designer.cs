@@ -437,7 +437,7 @@ namespace NhsoApp
             bntSentData.TabIndex = 1;
             bntSentData.Text = "พิมท์สิทธิ์รับบริการ";
             bntSentData.UseVisualStyleBackColor = true;
-            bntSentData.Click += bntSentData_Click;
+            bntSentData.Click += btnPrint_Click;
             // 
             // timer1
             // 

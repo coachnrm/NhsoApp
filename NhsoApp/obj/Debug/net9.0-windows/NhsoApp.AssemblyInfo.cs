@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NhsoApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+855073e88f14758a34cf95a5f6fe6ab10b87cb33")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26ce61faf249fb60db0505bf29556bc133440d64")]
 [assembly: System.Reflection.AssemblyProductAttribute("NhsoApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NhsoApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
